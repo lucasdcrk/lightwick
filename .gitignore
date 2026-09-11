@@ -1,0 +1,14 @@
+.env
+.env.*
+!.env.example
+node_modules/
+dist/
+__pycache__/
+.pytest_cache/
+.DS_Store
+# dev HA state; only configuration.yaml is tracked
+docker/config/*
+!docker/config/configuration.yaml
+# built frontend, produced by `make build`
+custom_components/lightwick/frontend/
+.venv/

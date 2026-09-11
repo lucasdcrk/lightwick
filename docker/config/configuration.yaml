@@ -1,0 +1,14 @@
+default_config:
+
+# ponytail: demo lights instead of an in-app demo mode; assign them to areas in the UI.
+# Point the MQTT integration at prod Mosquitto to see real Z2M devices.
+demo:
+
+http:
+  cors_allowed_origins:
+    - http://localhost:5173
+
+logger:
+  default: info
+  logs:
+    custom_components.lightwick: debug
