@@ -1,0 +1,6 @@
+{
+  "config": {
+    "step": { "user": { "title": "Lightwick", "description": "Adds the Lightwick panel and scene engine." } },
+    "abort": { "single_instance_allowed": "Already configured." }
+  }
+}

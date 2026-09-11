@@ -1,0 +1,26 @@
+apply_scene:
+  name: Apply scene
+  description: Apply a Lightwick scene to a room.
+  fields:
+    room_id:
+      name: Room
+      description: Area id of the room.
+      required: true
+      example: living_room
+      selector:
+        area:
+    scene_id:
+      name: Scene
+      description: Lightwick scene id (builtin like "relax" or a custom scene id).
+      required: true
+      example: relax
+      selector:
+        text:
+    transition:
+      name: Transition
+      description: Seconds.
+      selector:
+        number:
+          min: 0
+          max: 60
+          unit_of_measurement: s
