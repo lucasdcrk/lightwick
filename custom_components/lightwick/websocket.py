@@ -235,3 +235,26 @@ async def ws_hardware_sync(hass, connection, msg):
     finally:
         await hass.services.async_call("scene", "turn_on", {"entity_id": "scene.lightwick_restore"}, blocking=True)
     connection.send_result(msg["id"], store.data["hardware"][r["id"]])
+
+
+@command({"_": "automation/get", vol.Required("automation_id"): str})
+async def ws_automation_get(hass, connection, msg):
+    from . import automations
+
+    connection.send_result(msg["id"], await automations.get(hass, msg["automation_id"]))
+
+
+@command({"_": "automation/save", vol.Required("automation_id"): str, vol.Required("config"): dict})
+async def ws_automation_save(hass, connection, msg):
+    from . import automations
+
+    await automations.save(hass, msg["automation_id"], msg["config"])
+    connection.send_result(msg["id"])
+
+
+@command({"_": "automation/delete", vol.Required("automation_id"): str})
+async def ws_automation_delete(hass, connection, msg):
+    from . import automations
+
+    await automations.delete(hass, msg["automation_id"])
+    connection.send_result(msg["id"])

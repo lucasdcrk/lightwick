@@ -1,1 +1,1 @@
-{ "name": "Lightwick", "render_readme": true }
+{ "name": "Lightwick", "render_readme": true, "zip_release": true, "filename": "lightwick.zip", "homeassistant": "2025.1.0" }

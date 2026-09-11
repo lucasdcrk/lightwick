@@ -9,6 +9,8 @@
     "check": "tsc -p ."
   },
   "dependencies": {
+    "@capacitor/core": "^8.0.0",
+    "@capacitor/preferences": "^8.0.0",
     "@lightwick/core": "workspace:*",
     "react": "^19.1.0",
     "react-dom": "^19.1.0"

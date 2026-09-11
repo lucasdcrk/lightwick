@@ -1,0 +1,24 @@
+name: Release
+on:
+  release:
+    types: [published]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with: { version: 10 }
+      - uses: actions/setup-node@v4
+        with: { node-version: 22, cache: pnpm, cache-dependency-path: frontend/pnpm-lock.yaml }
+      - run: pnpm -C frontend install --frozen-lockfile
+      - run: pnpm -C frontend build
+      - name: Stamp version
+        run: |
+          v="${GITHUB_REF_NAME#v}"
+          sed -i "s/\"version\": \"[^\"]*\"/\"version\": \"$v\"/" custom_components/lightwick/manifest.json
+      - run: cd custom_components/lightwick && zip -r ../../lightwick.zip .
+      - uses: softprops/action-gh-release@v2
+        with: { files: lightwick.zip }
