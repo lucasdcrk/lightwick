@@ -6,7 +6,4 @@
     "build": "pnpm -C apps/web build",
     "check": "pnpm -r check"
   },
-  "pnpm": {
-    "onlyBuiltDependencies": ["esbuild"]
-  }
 }
