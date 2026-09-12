@@ -1,16 +1,17 @@
 @import "tailwindcss";
+@import url("https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700&display=swap");
 
 @theme {
-  --color-bg: #0a0a0e;
-  --color-card: #16161c;
-  --color-card2: #21212a;
-  --color-line: #2a2a34;
-  --color-text: #f5f5f7;
-  --color-muted: #8b8b96;
-  --color-accent: #ffb547;
+  --color-bg: #0d0d0f;
+  --color-card: #1a1a1c;
+  --color-card2: #242427;
+  --color-line: #2a2a2d;
+  --color-text: #f5f4f2;
+  --color-muted: #8a8886;
+  --color-accent: #f4b89a;
   --color-danger: #ff5c5c;
-  --radius-card: 22px;
-  --font-sans: -apple-system, BlinkMacSystemFont, "SF Pro Text", Inter, "Segoe UI", Roboto, sans-serif;
+  --radius-card: 16px;
+  --font-sans: "Satoshi", -apple-system, BlinkMacSystemFont, "SF Pro Text", Inter, system-ui, sans-serif;
 }
 
 :root, :host {

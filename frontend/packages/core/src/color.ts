@@ -61,3 +61,26 @@ export function gradient(swatches: RGB[], angle = 135): string {
 
 /** Perceived lightness 0..1, to pick text colour over a swatch. */
 export const luminance = ([r, g, b]: RGB) => (0.2126 * r + 0.7152 * g + 0.0722 * b) / 255;
+
+/** Gradient tint for a lit surface, derived from the colour the light shows. Mirrors the design's tint table. */
+export type Tint = { g1: string; g2: string; glow: string; ink: string; sub: string };
+
+const mix = (a: RGB, b: RGB, t: number): RGB => a.map((v, i) => Math.round(v + (b[i] - v) * t)) as RGB;
+
+export function tintFromRgb(rgb: RGB | null): Tint {
+  const base = rgb ?? [244, 184, 154];
+  // lift towards a warm pastel so saturated bulb colours still read as a soft surface
+  const g1 = mix(base, [255, 236, 220], 0.35);
+  const g2 = mix(base, [255, 215, 110], 0.55);
+  const dark = luminance(g1) < 0.45;
+  return {
+    g1: css(g1),
+    g2: css(g2),
+    glow: `${g1[0]},${g1[1]},${g1[2]}`,
+    ink: dark ? "#fff8f2" : "#241a10",
+    sub: dark ? "rgba(255,248,242,.75)" : "#4a3220",
+  };
+}
+
+/** Lift a bulb colour towards a warm pastel so it reads as a surface, not a neon block. */
+export const soften = (rgb: RGB, amount = 0.22): RGB => mix(rgb, [255, 236, 220], amount);

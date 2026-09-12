@@ -5,8 +5,24 @@ import { useStore } from "../store";
 
 /* ---------- layout ---------- */
 
-export function TopBar({ title, onBack, right, subtitle }: { title: string; onBack?: () => void; right?: ReactNode; subtitle?: string }) {
+export function TopBar({ title, onBack, right, subtitle, large }: { title: string; onBack?: () => void; right?: ReactNode; subtitle?: string; large?: boolean }) {
   const { onMenu } = useStore();
+  if (large) {
+    return (
+      <header className="safe-t relative flex items-start gap-2 px-[18px] pb-5 pt-4">
+        {onMenu ? (
+          <button onClick={onMenu} aria-label="Menu" className="press -ml-1 mt-1 flex h-9 w-9 items-center justify-center rounded-full text-text md:hidden">
+            <Menu />
+          </button>
+        ) : null}
+        <div className="min-w-0 flex-1">
+          <h1 className="text-[27px] font-medium text-white">{title}</h1>
+          {subtitle ? <div className="mt-1.5 text-[12.5px] font-medium text-muted">{subtitle}</div> : null}
+        </div>
+        {right}
+      </header>
+    );
+  }
   return (
     <header className="safe-t sticky top-0 z-20 flex items-center gap-2 bg-bg/80 px-3 pb-2 backdrop-blur-xl">
       {onBack ? (
@@ -28,9 +44,9 @@ export function TopBar({ title, onBack, right, subtitle }: { title: string; onBa
 }
 
 export const Section = ({ title, right, children }: { title: string; right?: ReactNode; children: ReactNode }) => (
-  <section className="mt-6 px-4">
-    <div className="mb-2 flex items-center justify-between">
-      <h2 className="text-[13px] font-semibold uppercase tracking-wider text-muted">{title}</h2>
+  <section className="relative mt-6 px-[18px]">
+    <div className="mb-3 flex items-baseline justify-between">
+      <h2 className="text-[20px] font-medium text-white">{title}</h2>
       {right}
     </div>
     {children}
@@ -85,9 +101,10 @@ export function Toggle({ on, onChange, size = "md" }: { on: boolean; onChange: (
         e.stopPropagation();
         onChange(!on);
       }}
-      className={`relative shrink-0 rounded-full p-1 transition-colors duration-200 ${w} ${on ? "bg-accent" : "bg-card2"}`}
+      className={`relative shrink-0 rounded-full p-1 transition-colors duration-200 ${w}`}
+      style={{ background: on ? "rgba(244,184,154,.9)" : "#3a3a3d" }}
     >
-      <span className={`block rounded-full bg-white shadow transition-transform duration-200 ${k} ${on ? tx : ""}`} />
+      <span className={`block rounded-full shadow transition-transform duration-200 ${k} ${on ? tx : ""}`} style={{ background: on ? "#fff" : "#6b6a68" }} />
     </button>
   );
 }
