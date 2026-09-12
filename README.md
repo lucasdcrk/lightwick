@@ -72,3 +72,5 @@ To work against real Zigbee devices, point the dev HA's MQTT integration at your
 ## Install on your Home Assistant
 
 Add this repository to HACS as an integration, install Lightwick, restart HA, then add the integration under Settings → Integrations. Lightwick appears in the sidebar. The mobile app is built from source for now.
+
+HACS → Integrations → three-dot menu → Custom repositories → add `https://github.com/lucasdcrk/lightwick` as type Integration.
